@@ -38,13 +38,14 @@ if ( $hRemove->count() > 0 && $hAdd->count() > 0) {
 
 // Updating IIS Max Upload Size
 echo $part2;
-$requestLimits = $security->{'requestFiltering'}->{'requestLimits'};
+$requestFiltering = $security->{'requestFiltering'};
+$requestLimits = $requestFiltering->{'requestLimits'};
 
-if($requestLimits->count() > 0) {
+if($requestFiltering->count() > 0) {
     if(intval($requestLimits['maxAllowedContentLength']) > (32 * 1024 * 1024)) {
         echo "Successfully set maxAllowedContentLength to: " . number_format((intval($requestLimits['maxAllowedContentLength']) / 1024 / 1024), 2, '.', '') . "MB </br></br>";
     } else {
-        echo "IIS Max Upload Size needs to be larger.";
+        echo "IIS Max Upload Size needs to be larger. </br></br>";
     }
 } else {
     echo $error;
